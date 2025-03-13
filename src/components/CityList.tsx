@@ -22,8 +22,9 @@ const CityList: React.FC = () => {
     try {
       const results = await Promise.all(
         cities.map(async (city) => {
-          const data = await fetchWeather(city);
-          return data ? { city, weather: data } : null;
+          const formattedCity = city.charAt(0).toUpperCase() + city.slice(1).toLowerCase(); // Ensure case-insensitive search
+          const data = await fetchWeather(formattedCity);
+          return data ? { city: formattedCity, weather: data } : null;
         })
       );
 
@@ -48,7 +49,7 @@ const CityList: React.FC = () => {
       {error && <p className="error">{error}</p>}
       <div className="city-grid">
         {weatherData.map(({ city, weather }, index) => (
-         <WeatherCard key={index} city={city} data={weather} />
+          <WeatherCard key={index} city={city} data={weather} />
         ))}
       </div>
     </div>

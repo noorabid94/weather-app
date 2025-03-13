@@ -1,14 +1,15 @@
-const API_KEY = "739ebe1e630e4e6591b194928250103"; // Ensure this is correct
+const API_KEY = "739ebe1e630e4e6591b194928250103";
 const BASE_URL = "http://api.weatherapi.com/v1/current.json";
 
 export const fetchWeather = async (city: string) => {
   try {
-    const formattedCity = encodeURIComponent(`${city.trim()}, PK`); // Ensure city is correctly formatted
+    // Normalize city name (remove spaces, capitalize first letter)
+    const formattedCity = encodeURIComponent(city.trim().replace(/\b\w/g, (c) => c.toUpperCase()));
+
     const response = await fetch(`${BASE_URL}?key=${API_KEY}&q=${formattedCity}&aqi=no`);
 
     if (!response.ok) {
-      const errorText = await response.text(); // Log API response
-      console.error("API Error Response:", errorText);
+      console.error("API Error:", await response.text());
       throw new Error("City not found. Please enter a valid location.");
     }
 
@@ -20,12 +21,12 @@ export const fetchWeather = async (city: string) => {
 
     return {
       temp_c: data.current.temp_c,
-      condition: data.current.condition, // Weather condition text & icon
+      condition: data.current.condition,
       humidity: data.current.humidity,
       wind_kph: data.current.wind_kph,
     };
   } catch (error) {
     console.error("Error fetching weather:", error);
-    return null; // Return null to avoid crashing the UI
+    return null; // Prevents UI from breaking
   }
 };
