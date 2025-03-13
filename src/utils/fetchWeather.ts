@@ -1,4 +1,4 @@
-const API_KEY = "9cd16722bc23439f9e511453251303";
+const API_KEY = process.env.NEXT_PUBLIC_WEATHER_API_KEY || "";  // Read API key from environment variables
 const BASE_URL = "http://api.weatherapi.com/v1/current.json";
 
 export const fetchWeather = async (city: string) => {
@@ -27,7 +27,11 @@ export const fetchWeather = async (city: string) => {
         }
       : null;
   } catch (error) {
-    console.error("Error fetching weather:", error.message);
+    if (error instanceof Error) {
+      console.error("Error fetching weather:", error.message);
+    } else {
+      console.error("Unknown error occurred:", error);
+    }
     return null;
   }
 };
