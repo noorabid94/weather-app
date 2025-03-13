@@ -1,14 +1,24 @@
 'use client'
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import SearchBar from "@/components/SearchBar";
 import WeatherCard from "@/components/WeatherCard";
 import { fetchWeather } from "@/utils/fetchWeather";
 import "@/styles/WeatherApp.css";
 
-const WeatherApp = () => {
-  const [city, setCity] = useState("");
-  const [weather, setWeather] = useState(null);
-  const [error, setError] = useState("");
+interface WeatherData {
+  temp_c: number;
+  condition: {
+    text: string;
+    icon: string;
+  };
+  humidity: number;
+  wind_kph: number;
+}
+
+const WeatherApp: React.FC = () => {
+  const [city, setCity] = useState<string>("");
+  const [weather, setWeather] = useState<WeatherData | null>(null);
+  const [error, setError] = useState<string>("");
 
   const handleSearch = async (cityName: string) => {
     setCity(cityName);
@@ -16,6 +26,7 @@ const WeatherApp = () => {
     const data = await fetchWeather(cityName);
     if (!data) {
       setError("City not found. Please try again.");
+      setWeather(null);
     } else {
       setWeather(data);
     }
@@ -24,9 +35,9 @@ const WeatherApp = () => {
   return (
     <div className="weather-app">
       <h1>Weather App</h1>
-      <SearchBar setWeather={setWeather} handleSearch={handleSearch} />
+      <SearchBar handleSearch={handleSearch} />
       {error && <p className="error">{error}</p>}
-      {weather && <WeatherCard data={weather} />}
+      {weather && <WeatherCard city={city} data={weather} />}
     </div>
   );
 };

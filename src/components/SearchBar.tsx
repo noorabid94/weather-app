@@ -6,12 +6,13 @@ interface SearchBarProps {
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({ handleSearch }) => {
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState<string>("");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (input.trim() === "") return;
-    handleSearch(input);
+    if (!input.trim()) return;
+    handleSearch(input.trim());
+    setInput(""); // Clears input after search
   };
 
   return (
