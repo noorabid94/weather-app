@@ -1,0 +1,57 @@
+.temperature-graph {
+  background: #1a2535;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  margin-top: 20px;
+  width: 100%;
+  max-width: 800px; /* Restrict max width for large screens */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Title Styling */
+.temperature-graph h3 {
+  color: white;
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+/* Paragraph Styling */
+.temperature-graph p {
+  font-size: 16px;
+  color: #bbb;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) { /* Tablets & Mobile */
+  .temperature-graph {
+    padding: 15px;
+    border-radius: 10px;
+    width: 90%;
+  }
+
+  .temperature-graph h3 {
+    font-size: 18px;
+  }
+
+  .temperature-graph p {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) { /* Small Screens */
+  .temperature-graph {
+    padding: 12px;
+    width: 95%;
+  }
+
+  .temperature-graph h3 {
+    font-size: 16px;
+  }
+
+  .temperature-graph p {
+    font-size: 13px;
+  }
+}
