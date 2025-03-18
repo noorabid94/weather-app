@@ -7,4 +7,26 @@
   flex-direction: column;
   align-items: center;
   padding: 20px;
+  width: 100%;
+  max-width: 1200px; /* Restrict max width on larger screens */
+  margin: 0 auto;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) { /* Tablets & Medium Screens */
+  .weather-app {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 768px) { /* Mobile & Small Tablets */
+  .weather-app {
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) { /* Small Mobile Screens */
+  .weather-app {
+    padding: 5px;
+  }
 }
