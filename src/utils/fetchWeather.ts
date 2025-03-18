@@ -1,5 +1,5 @@
 const API_KEY = process.env.NEXT_PUBLIC_WEATHER_API_KEY || "";  // Read API key from environment variables
-const BASE_URL = "http://api.weatherapi.com/v1/current.json";
+const BASE_URL = "https://api.weatherapi.com/v1/current.json";
 
 export const fetchWeather = async (city: string) => {
   try {
