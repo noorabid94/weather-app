@@ -93,3 +93,8 @@
       font-size: 12px;
   }
 }
+.error {
+  color: red;
+  font-weight: bold;
+  margin-top: 10px;
+}
